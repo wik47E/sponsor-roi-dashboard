@@ -13,7 +13,7 @@ export default {
         ink: {
           DEFAULT: "#1c1b29",
           soft: "#3d3b52",
-          dim: "#7a7791",
+          dim: "#5c596e",
         },
         gold: {
           DEFAULT: "#b8863f",

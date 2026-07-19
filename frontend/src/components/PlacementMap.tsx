@@ -210,16 +210,29 @@ export default function PlacementMap({ placements, scores }: Props) {
             const exposure = score?.exposure_score ?? 20;
             const r = 1.5 + (exposure / 100) * 2.2;
             const isHover = hoveredId === p.id;
+            const label = `${p.name}, ${VERDICT_LABEL[verdict]}, exposure ${exposure} out of 100${
+              score ? `, CPM $${score.cost_per_thousand_impressions}` : ""
+            }`;
             return (
               <g
                 key={p.id}
                 transform={`translate(${p.x * 100} ${p.y * 100})`}
                 onMouseEnter={() => setHoveredId(p.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                style={{ cursor: "pointer" }}
+                onFocus={() => setHoveredId(p.id)}
+                onBlur={() => setHoveredId(null)}
+                tabIndex={0}
+                role="button"
+                aria-label={label}
+                style={{ cursor: "pointer", outline: "none" }}
               >
                 <circle r={r + 1.4} fill={VERDICT_COLOR[verdict]} opacity={isHover ? 0.3 : 0.15} />
-                <circle r={r} fill={VERDICT_COLOR[verdict]} stroke="#fffdf7" strokeWidth="0.4" />
+                <circle
+                  r={r}
+                  fill={VERDICT_COLOR[verdict]}
+                  stroke="#fffdf7"
+                  strokeWidth={isHover ? "1" : "0.4"}
+                />
               </g>
             );
           })}
@@ -229,6 +242,7 @@ export default function PlacementMap({ placements, scores }: Props) {
           className={`mt-3 border border-line bg-paper px-4 py-3 transition-opacity ${
             hoveredPlacement ? "opacity-100" : "opacity-60"
           }`}
+          aria-live="polite"
         >
           {hoveredPlacement ? (
             <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
