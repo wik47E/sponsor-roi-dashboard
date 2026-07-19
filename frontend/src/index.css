@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  background: #f6f2e9;
+  color: #1c1b29;
+}
+
+::selection {
+  background: #b8863f;
+  color: #fffdf7;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid #b8863f;
+  outline-offset: 2px;
+}
+
+.paper-texture {
+  background-image: radial-gradient(circle at 1px 1px, rgba(28,27,41,0.035) 1px, transparent 0);
+  background-size: 18px 18px;
+}
