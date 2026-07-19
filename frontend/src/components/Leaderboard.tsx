@@ -34,6 +34,7 @@ export default function Leaderboard({ scores, topRecommendation }: Props) {
           <li
             key={s.placement_id}
             className={`rounded-sm border bg-white/40 px-3 py-3 ${VERDICT_STYLE[s.verdict]}`}
+            aria-label={`Rank ${i + 1}: ${s.placement_name} in ${s.zone_name}. ${s.verdict}. ${s.rationale} Exposure ${s.exposure_score} out of 100. Suggested ${currency(s.recommended_monthly_value)} per month.`}
           >
             <div className="flex items-start justify-between gap-3">
               <div>
